@@ -4,7 +4,7 @@ import SendOTP from "../components/templates/SendOTP";
 import CheckOTP from "../components/templates/CheckOTP";
 
 function Auth() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [mobile, setMobile] = useState("");
   const [code, setCode] = useState("");
 

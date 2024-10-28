@@ -8,6 +8,15 @@ const sendOTP = async (mobile) => {
     return { error: error };
   }
 };
-console.log(api.defaults.baseURL);
+// console.log(api.defaults.baseURL);
 
-export { sendOTP };
+const checkOTP = async (mobile, code) => {
+  try {
+    const response = await api.post("auth/check-otp", { mobile, code });
+    return { response };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export { sendOTP, checkOTP };
