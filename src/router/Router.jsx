@@ -5,8 +5,13 @@ import NotFound from "../../src/pages/NotFound";
 import Homepage from "../../src/pages/Homepage";
 import Admin from "../../src/pages/Admin";
 import Auth from "../../src/pages/Auth";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "../services/user";
 
 function Router() {
+  console.log("heyyy");
+  const { data, isLoading, error } = useQuery(["profile"], getProfile);
+  console.log({ data, isLoading, error });
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} replace />
