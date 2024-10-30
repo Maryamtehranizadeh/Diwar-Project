@@ -9,9 +9,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../services/user";
 
 function Router() {
-  console.log("heyyy");
   const { data, isLoading, error } = useQuery(["profile"], getProfile);
   console.log({ data, isLoading, error });
+  if (isLoading) return <h1>Loading... Please Wait!</h1>;
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} replace />
