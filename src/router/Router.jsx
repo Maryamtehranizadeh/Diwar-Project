@@ -7,7 +7,7 @@ import Admin from "../../src/pages/Admin";
 import Auth from "../../src/pages/Auth";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../services/user";
-
+import { Navigate } from "react-router-dom";
 function Router() {
   const { data, isLoading, error } = useQuery(["profile"], getProfile);
   console.log({ data, isLoading, error });
@@ -15,9 +15,20 @@ function Router() {
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} replace />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/auth" element={<Auth />} />
-      <Route path="/admin" element={<Admin />} />
+      <Route
+        path="/dashboard"
+        element={data ? <Dashboard /> : <Navigate to="/auth" />}
+      />
+      <Route
+        path="/auth"
+        element={data ? <Navigate to="/dashboard" /> : <Auth />}
+      />
+      <Route
+        path="/admin"
+        element={
+          data && data.data.role === "ADMIN" ? <Admin /> : <Navigate to="/" />
+        }
+      />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );
