@@ -8,10 +8,12 @@ import Auth from "../../src/pages/Auth";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../services/user";
 import { Navigate } from "react-router-dom";
+import Navbar from "../Navbar";
+import Loader from "../components/modules/Loader";
 function Router() {
   const { data, isLoading, error } = useQuery(["profile"], getProfile);
   console.log({ data, isLoading, error });
-  if (isLoading) return <h1>Loading... Please Wait!</h1>;
+  if (isLoading) return <Loader />;
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} replace />
