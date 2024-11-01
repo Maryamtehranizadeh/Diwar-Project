@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import defaultOptions from "./configs/reactQuery";
 import Router from "./router/Router";
-import Navbar from "./Navbar";
+import Layout from "./layouts/Layout";
 
 const queryClient = new QueryClient({
   defaultOptions,
@@ -13,8 +13,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Navbar />
-        <Router />
+        <Layout>
+          <Router />
+        </Layout>
       </BrowserRouter>
       <ReactQueryDevtools />
     </QueryClientProvider>
