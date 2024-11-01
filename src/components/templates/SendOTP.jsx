@@ -1,6 +1,7 @@
 import React from "react";
 import { sendOTP } from "../../services/auth";
 import { useState } from "react";
+import styles from "./SendOTP.module.css";
 
 function SendOTP({ mobile, step, setMobile, setStep }) {
   const [error, setError] = useState("");
@@ -18,14 +19,13 @@ function SendOTP({ mobile, step, setMobile, setStep }) {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <p>Logging in</p>
       <span>
         To use Wall services, enter your phone number, you will receive a
         verification code.
       </span>
       <label htmlFor="input">Enter Your Phone Number</label>
-      <hr />
       <input
         id="input"
         type="text"

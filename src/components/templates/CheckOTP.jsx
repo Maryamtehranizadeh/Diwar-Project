@@ -4,8 +4,9 @@ import { setCookie } from "../../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../../services/user";
+import styles from "./CheckOTP.module.css";
 
-function CheckOTP({ step, setStep, code, setCode, mobile }) {
+function CheckOTP({ setStep, code, setCode, mobile }) {
   const { refetch } = useQuery(["profile"], getProfile);
 
   const [error, setError] = useState("");
@@ -28,10 +29,9 @@ function CheckOTP({ step, setStep, code, setCode, mobile }) {
     }
   };
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <p>Validate the code:</p>
       <span>Check the code sent to the mobile {mobile}</span>
-      <hr />
       <label htmlFor="input">Enter your code</label>
       <input
         value={code}
@@ -42,7 +42,6 @@ function CheckOTP({ step, setStep, code, setCode, mobile }) {
       />
       <button type="submit">Enter</button>
       <p>{error}</p>
-      <hr />
       <button onClick={() => setStep(1)}>Change Mobile Number</button>
     </form>
   );
