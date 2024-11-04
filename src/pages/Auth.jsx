@@ -10,7 +10,7 @@ function Auth() {
 
   return (
     <div>
-      <p>Auth</p>
+      <p>Auth 09189990099</p>
       {step === 1 && (
         <SendOTP
           mobile={mobile}

@@ -13,8 +13,8 @@ function CheckOTP({ setStep, code, setCode, mobile }) {
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log({ code, mobile });
+    // console.log(e);
+    // console.log({ code, mobile });
     if (code.length !== 5) return;
     const { response, error } = await checkOTP(mobile, code);
 

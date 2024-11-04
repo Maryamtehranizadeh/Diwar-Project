@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Category from "../components/templates/Category";
+import CategoryList from "../components/templates/CategoryList";
 
 function Admin() {
   return (
-    <div>Admin</div>
-  )
+    <div>
+      <Category />
+      <CategoryList />
+    </div>
+  );
 }
 
-export default Admin
+export default Admin;
