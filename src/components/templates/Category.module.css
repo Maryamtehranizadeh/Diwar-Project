@@ -1,8 +1,13 @@
+.form {
+  text-align: center;
+}
+
 .form h3 {
   margin-bottom: 30px;
-  border-bottom: 3px solid tomato;
+  /* border-bottom: 3px solid tomato; */
   width: fit-content;
   padding-bottom: 5px;
+  margin: auto;
 }
 
 .form label {
@@ -11,6 +16,7 @@
   margin-bottom: 10px;
 }
 .form input {
+  margin: auto;
   display: block;
   width: 300px;
   border: 1px solid silver;
