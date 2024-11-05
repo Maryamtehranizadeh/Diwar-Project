@@ -16,6 +16,7 @@ function CategoryList() {
 
   const deleteHandler = (id) => {
     deleteMutation.mutate(id);
+    
   };
   return (
     <div className={styles.list}>
