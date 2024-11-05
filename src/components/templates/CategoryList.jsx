@@ -16,14 +16,13 @@ function CategoryList() {
 
   const deleteHandler = (id) => {
     deleteMutation.mutate(id);
-    
   };
   return (
     <div className={styles.list}>
       {isLoading ? (
         <Loader />
       ) : (
-        data.data.map((i) => (
+        data?.data.map((i) => (
           <div key={i._id} className={styles.category}>
             <img src={`${i.icon}.svg`} />
             <h5>{i.name}</h5>
