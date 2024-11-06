@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
+import { expireCookie } from "../utils/cookie";
 
 function Header() {
+  const logoutHandler = () => {
+    expireCookie("accessToken");
+    expireCookie("refreshToken");
+    window.location.replace("/auth");
+  };
   return (
     <header className={styles.header}>
       <div>
@@ -19,6 +25,9 @@ function Header() {
             <p>My Wall</p>
             <img src="profile.svg" />
           </span>
+        </Link>
+        <Link to="/auth" className={styles.button} onClick={logoutHandler}>
+          Logout
         </Link>
         <Link to="/dashboard" className={styles.button}>
           Place an add

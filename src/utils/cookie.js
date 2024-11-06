@@ -9,4 +9,9 @@ const getCookie = (cookiName) => {
     ?.split("=")[1];
 };
 
-export { setCookie, getCookie };
+const expireCookie = (cookiName) => {
+  document.cookie = `${cookiName}=; max-age=0; path=/;`;
+};
+
+
+export { setCookie, getCookie, expireCookie };
