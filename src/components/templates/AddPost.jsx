@@ -1,12 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCategory } from "../../services/admin";
 import { useState } from "react";
 import styles from "./AddPost.module.css";
 import { getCookie } from "../../utils/cookie";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function AddPost() {
+  const queryClient = useQueryClient();
   const [isSuccess, setIsSuccess] = useState(false);
   const { data } = useQuery(["get-categories"], getCategory);
   const [form, setForm] = useState({
@@ -45,6 +46,7 @@ function AddPost() {
         if (res.status === 200) {
           setIsSuccess(true);
           toast.success(res.data.message);
+          queryClient.invalidateQueries(["get-post-list"]);
         }
       })
       .catch((error) => {
