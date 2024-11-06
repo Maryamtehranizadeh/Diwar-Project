@@ -2,8 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "../../services/admin";
 import { useState } from "react";
 import styles from "./AddPost.module.css";
+import { getCookie } from "../../utils/cookie";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function AddPost() {
+  const [isSuccess, setIsSuccess] = useState(false);
   const { data } = useQuery(["get-categories"], getCategory);
   const [form, setForm] = useState({
     title: "",
@@ -23,12 +27,37 @@ function AddPost() {
 
   const addHandler = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    const formData = new FormData();
+    for (let i in form) {
+      formData.append(i, form[i]);
+    }
+    console.log(formData);
+    const token = getCookie("accessToken");
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}post/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setIsSuccess(true);
+          toast.success(res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsSuccess(false);
+        toast.error("Something went wrong!");
+      });
   };
 
   return (
     <form onChange={changeHandler} className={styles.form}>
       <h3>Place an add</h3>
+      {isSuccess && <p>Your add is placed successfully!</p>}
       <label htmlFor="titile">Title</label>
       <input type="text" id="title" name="title" placeholder="Title" />
 
@@ -36,7 +65,7 @@ function AddPost() {
       <textarea name="content" id="content" />
 
       <label htmlFor="amount">Price</label>
-      <input type="text" id="amount" name="amount" placeholder="Price" />
+      <input type="number" id="amount" name="amount" placeholder="Price" />
 
       <label htmlFor="city">City</label>
       <input type="text" id="city" name="city" placeholder="City" />
@@ -52,6 +81,7 @@ function AddPost() {
 
       <label htmlFor="images">Photo</label>
       <input type="file" id="images" name="images" />
+
       <button onClick={addHandler}>Create Add</button>
     </form>
   );
