@@ -40,15 +40,15 @@ function Details() {
           <div
             style={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
           >
-            <h3>Post Details</h3>
-            <h1>Name: {thisPost.options.title}</h1>
+            <h1 style={{ color: "tomato" }}>Name: {thisPost.options.title}</h1>
+            <h3 style={{ borderBottom: "1px solid tomato" }}>More Details:</h3>
+            <p>Explanation: {thisPost.options.content}</p>
+            <h5>Price: {formatPrice(thisPost.amount)}€</h5>
             <h5>
-              Post created at:
+              Post created at:{" "}
               {new Date(thisPost.createdAt).toLocaleDateString("PT")}
             </h5>
             <p>Location:{thisPost.options.city}</p>
-            <h5>Price: {formatPrice(thisPost.amount)}€</h5>
-            <p>Explanation: {thisPost.options.content}</p>
           </div>
         </div>
       )}
