@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { expireCookie } from "../utils/cookie";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "../services/user";
 
 function Header() {
+  const { data, isLoading } = useQuery(["profile"], getProfile);
+
   const logoutHandler = () => {
     expireCookie("accessToken");
     expireCookie("refreshToken");
-    window.location.replace("/auth");
+    useQuery(["profile"], getProfile);
   };
   return (
     <header className={styles.header}>
@@ -20,18 +24,25 @@ function Header() {
         </span>
       </div>
       <div>
-        <Link to="/auth">
-          <span>
-            <p>My Wall</p>
-            <img src="profile.svg" />
-          </span>
-        </Link>
+        {data && data.data.role !== "ADMIN" && (
+          <Link to="/auth">
+            <span>
+              <p>My Wall</p>
+              <img src="profile.svg" />
+            </span>
+          </Link>
+        )}
         <Link to="/auth" className={styles.button} onClick={logoutHandler}>
           Logout
         </Link>
         <Link to="/dashboard" className={styles.button}>
           Place an add
         </Link>
+        {data && data.data.role === "ADMIN" && (
+          <Link className={styles.button} to="/admin">
+            Admin Panel
+          </Link>
+        )}
       </div>
     </header>
   );

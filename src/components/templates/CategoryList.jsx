@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "../modules/Loader";
 import { deleteCategory } from "../../services/admin";
 import styles from "./CategoryList.module.css";
+import toast from "react-hot-toast";
 
 function CategoryList() {
   const { isLoading, data } = useQuery(["get-categories"], getCategory);
@@ -11,6 +12,7 @@ function CategoryList() {
   const deleteMutation = useMutation((id) => deleteCategory(id), {
     onSuccess: () => {
       queryClient.invalidateQueries(["get-categories"]);
+      toast.success("Category is deleted !");
     },
   });
 

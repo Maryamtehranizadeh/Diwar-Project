@@ -3,12 +3,14 @@ import { useState } from "react";
 import styles from "./Category.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addCategory } from "../../services/admin";
+import toast from "react-hot-toast";
 function Category() {
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
   const queryClient = useQueryClient();
   const { mutate, isLoading, error, data } = useMutation(addCategory, {
     onSuccess: () => {
       queryClient.invalidateQueries(["get-categories"]);
+      toast.success("Category is added successfuly!");
     },
   });
 
@@ -33,7 +35,7 @@ function Category() {
     >
       <h3>Make a new Category</h3>
       {!!error && <p>{error.message}</p>}
-      {data?.status === 201 && <p>Category is added successfuly</p>}
+      {/* {data?.status === 201 && <p>Category is added successfully!</p>} */}
       <label htmlFor="name"></label>
       <input type="text" name="name" id="name" placeholder="name" />
 
