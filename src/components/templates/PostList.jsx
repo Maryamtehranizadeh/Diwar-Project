@@ -7,7 +7,7 @@ import { deletePost } from "../../services/user";
 
 function PostList() {
   const { data, isLoading } = useQuery(["get-post-list"], getPosts);
-  //   console.log(data?.data.posts);
+  console.log(data?.data.posts);
 
   const queryClient = useQueryClient();
   const deleteMutation = useMutation((id) => deletePost(id), {
@@ -28,6 +28,7 @@ function PostList() {
           <h3>Your Adds</h3>
           {data.data.posts.map((post) => (
             <div key={post._id} className={styles.post}>
+              <p>{post.options.category}</p>
               <img src={`${import.meta.env.VITE_BASE_URL}${post.images[0]}`} />
               <div>
                 <p>{post.options.title}</p>

@@ -1,0 +1,33 @@
+.sidebar {
+  margin-top: 30px;
+  width: 200px;
+}
+.sidebar li {
+  display: flex;
+  margin: 20px 0;
+  cursor: pointer;
+}
+.sidebar li p {
+  color: grey;
+  font-weight: 200;
+  margin-left: 10px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list p {
+  color: grey;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.listContainer {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+}

@@ -76,7 +76,7 @@ function AddPost() {
       <select name="category" id="category">
         {data?.data.map((i) => (
           <option key={i._id} value={i._id}>
-            {i.name}
+            {i.icon}
           </option>
         ))}
       </select>
