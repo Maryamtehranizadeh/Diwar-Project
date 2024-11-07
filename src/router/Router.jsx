@@ -9,13 +9,16 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../services/user";
 import { Navigate } from "react-router-dom";
 import Loader from "../components/modules/Loader";
+import Details from "../pages/Details";
+
 function Router() {
-  const { data, isLoading} = useQuery(["profile"], getProfile);
+  const { data, isLoading } = useQuery(["profile"], getProfile);
   // console.log({ data, isLoading, error });
   if (isLoading) return <Loader />;
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} replace />
+      <Route path="/post/:id" element={<Details />} />
       <Route
         path="/dashboard"
         element={data ? <Dashboard /> : <Navigate to="/auth" />}
